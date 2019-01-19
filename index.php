@@ -4,6 +4,9 @@
  * User: Jake
  * Date: 1/17/2019
  * Time: 4:55 PM
+ *
+ * index.php
+ * Fat Free Framework with default route set for dating website
  */
 
 //turn on error reporting
