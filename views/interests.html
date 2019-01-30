@@ -1,0 +1,119 @@
+<!--
+    Jake Suhoversnik
+    1/30/19
+    Assignment 2 Dating website
+    interests.html
+
+    Profile creation, user selects from a list of interests to be added to their profile
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <!--Bootstrap Styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container border mt-3">
+    <div class="row m-3">
+        <section class="col-12 mt-3">
+            <h1>Interests</h1>
+            <hr>
+        </section>
+
+        <section class="col-12">
+
+            <!--Site Bio-->
+            <form action="">
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="interests1">In-door Interests:</label>
+                    <div class="checkbox row">
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="interests1" name="interests1[]" value="tv"> tv</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="movies"> movies</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="cooking"> cooking</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="board games"> board games</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="puzzles"> puzzles</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="reading"> reading</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="playing cards"> playing cards</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests1[]" value="video games"> video games</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="interests2">Out-door Interests:</label>
+                    <div class="checkbox row">
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="interests2" name="interests2[]" value="hiking"> hiking</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests2[]" value="biking"> biking</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests2[]" value="swimming"> swimming</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests2[]" value="collecting"> collecting</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests2[]" value="walking"> walking</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="interests2[]" value="climbing"> climbing</label>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+
+
+        <div class="col text-right mr-3 mb-3">
+            <button class="btn btn-primary" type="submit">Next ></button>
+        </div>
+    </div>
+</div>
+
+
+<!--Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>
