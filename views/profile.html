@@ -1,0 +1,79 @@
+<!--
+    Jake Suhoversnik
+    1/18/19
+    Assignment 1 Dating website
+    home.html
+
+    Default view, landing page for dating website
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <!--Bootstrap Styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container border mt-3">
+    <div class="row m-3">
+        <section class="col-12 mt-3">
+            <h1>Profile</h1>
+            <hr>
+        </section>
+
+        <section class="col-md-6">
+
+            <!--Site Bio-->
+            <form action="">
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="state">State:</label>
+                    <select class="form-control" id="state" name="state">
+                        <option value="Washington">Washington</option>
+                        <option value="Oregon">Oregon</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="font-weight-bold" for="seeking1">Seeking:</label>
+                    <div class="radio">
+                        <label class="radio-inline"><input type="radio" id="seeking1" name="seeking" value="male" checked> Male</label>
+                        <label class="radio-inline"><input type="radio" name="seeking" value="female"> Female</label>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="font-weight-bold" for="bio">Biography:</label>
+                <textarea class="form-control" rows="5" id="bio" name="bio"></textarea>
+            </div>
+        </div>
+
+        <div class="col text-right mr-3 mb-3">
+            <button class="btn btn-primary" type="submit">Next ></button>
+        </div>
+    </div>
+</div>
+
+
+<!--Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html></title>
+</head>
+<body>
