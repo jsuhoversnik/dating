@@ -28,27 +28,34 @@
             <form action="">
 
                 <div class="mt-3 pt-1">
-                    <p class="border mb-0">Name: </p>
-                    <p class="border mt-0 mb-0">Gender: </p>
-                    <p class="border mt-0 mb-0">Age: </p>
-                    <p class="border mt-0 mb-0">Phone: </p>
+                    <p class="border mb-0">Name: {{@SESSION['fname']}} {{@SESSION['lname']}}</p>
+
+                    <p class="border mt-0 mb-0">Gender:
+                        <check if="{{isset(@SESSION['gender'])}}">
+                            {{@SESSION['gender']}}
+                        </check>
+                    </p>
+
+                    <p class="border mt-0 mb-0">Age: {{@SESSION['age']}}</p>
+                    <p class="border mt-0 mb-0">Phone: {{@SESSION['phone']}}</p>
                     <p class="border mt-0 mb-0">Email: </p>
                     <p class="border mt-0 mb-0">State: </p>
                     <p class="border mt-0 mb-0">Seeking: </p>
-                    <p class="border mt-0 mb-0">Interests:
 
+                    <p class="border mt-0 mb-0">Interests:
                         <check if="{{isset(@SESSION['outdoor'])}}">
                             <repeat group="{{@SESSION['outdoor']}}" value="{{@outdoorChoices}}">
                                 {{@outdoorChoices}}
                             </repeat>
                         </check>
 
-                    <check if="{{isset(@SESSION['indoor'])}}">
-                        <repeat group="{{@SESSION['indoor']}}" value="{{@indoorChoices}}">
-                            {{@indoorChoices}}
-                        </repeat>
-                    </check>
+                        <check if="{{isset(@SESSION['indoor'])}}">
+                            <repeat group="{{@SESSION['indoor']}}" value="{{@indoorChoices}}">
+                                {{@indoorChoices}}
+                            </repeat>
+                        </check>
                     </p>
+
                 </div>
 
             </form>

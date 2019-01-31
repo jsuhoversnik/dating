@@ -35,44 +35,56 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
-$f3->route('POST /personal', function($f3){
-    /*
-    $_SESSION=array();
-    if(isset($_POST['color'])){
-        $color=$_POST['color'];
-        if(validColor($color)){
-            $_SESSION['color']=$color;
-            $f3->reroute('/result');
-        }else{
-            $f3->set("error['color']","Please select a color.");
+$f3->route('GET|POST /personal',
+    function($f3){
+
+    $_SESSION = array();
+    print_r($_POST);
+
+    if(isset($_POST['fname'])){
+        $fname = $_POST['fname'];
+            if (validName($fname)) {
+                $_SESSION['fname'] = $fname;
+            } else {
+                $f3->set("errors['fname']", "First name contains non alphabetic characters.");
+            }
+    }
+    if(isset($_POST['lname'])){
+        $lname = $_POST['lname'];
+        if (validName($lname)) {
+            $_SESSION['lname'] = $lname;
+        } else {
+            $f3->set("errors['lname']", "Last name contains non alphabetic characters.");
         }
     }
-    */
-    //print_r($_POST);
-//    $_SESSION["animal"] = $_POST[animal];
-//    $f3->set("animal", $_SESSION["animal"]);
-    //print_r($_SESSION);
-
-    $template = new Template();
-    echo $template->render('views/personal.html');
-});
-
-$f3->route('GET|POST /personal', function($f3){
-
-   // $_SESSION=array();
-    /*
-    print_r($_POST);
-    if(isset($_POST['fname'])) {
-        $fname = $_POST['fname'];
-        $f3->$_SESSION['fname'] = $fname;
-        $f3->reroute('/profile');
-    }else{
-        $f3->set("error['fname']","Please enter a first name.");
+    if(isset($_POST['age'])){
+        $age = $_POST['age'];
+        if(validAge($age)){
+            $_SESSION['age'] = $age;
+        } else{
+            $f3->set("errors['age']","Provided age under 18");
+        }
     }
-    */
-//    $_SESSION["animal"] = $_POST[animal];
-//    $f3->set("animal", $_SESSION["animal"]);
-    //print_r($_SESSION);
+    if(isset($_POST['gender'])){
+        $_SESSION['gender'] = $_POST['gender'];
+    }
+
+    if(isset($_POST['phone'])){
+        $phone = $_POST['phone'];
+        if(validPhone($phone)){
+
+            //todo inset into phone string '-' marks
+            $_SESSION['phone'] = $phone;
+        }else{
+            $f3->set("errors['phone']","Unrecognized phone number provided");
+        }
+    }
+
+    //todo make me actually stop things
+    if(!isset($errors['fname']) and isset($fname))
+    {
+       $f3->reroute('/profile');
+    }
 
     $template = new Template();
     echo $template->render('views/personal.html');
@@ -80,7 +92,7 @@ $f3->route('GET|POST /personal', function($f3){
 
 $f3->route('GET|POST /profile', function($f3){
 
-
+    print_r($_SESSION);
 
     $template = new Template();
     echo $template->render('views/profile.html');
@@ -88,8 +100,10 @@ $f3->route('GET|POST /profile', function($f3){
 
 $f3->route('GET|POST /interests',
     function($f3){
+
+    $_SESSION['indoor'] = array();
+    $_SESSION['outdoor'] = array();
     print_r($_POST);
-    $_SESSION = array();
 
     if(isset($_POST['outdoor'])) {
         $outdoor = $_POST['outdoor'];
