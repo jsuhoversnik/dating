@@ -35,7 +35,20 @@
                     <p class="border mt-0 mb-0">Email: </p>
                     <p class="border mt-0 mb-0">State: </p>
                     <p class="border mt-0 mb-0">Seeking: </p>
-                    <p class="border mt-0 mb-0">Interests: </p>
+                    <p class="border mt-0 mb-0">Interests:
+
+                        <check if="{{isset(@SESSION['outdoor'])}}">
+                            <repeat group="{{@SESSION['outdoor']}}" value="{{@outdoorChoices}}">
+                                {{@outdoorChoices}}
+                            </repeat>
+                        </check>
+
+                    <check if="{{isset(@SESSION['indoor'])}}">
+                        <repeat group="{{@SESSION['indoor']}}" value="{{@indoorChoices}}">
+                            {{@indoorChoices}}
+                        </repeat>
+                    </check>
+                    </p>
                 </div>
 
             </form>

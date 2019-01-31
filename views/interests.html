@@ -20,7 +20,7 @@
 <body>
 
 <div class="container border mt-3">
-    <div class="row m-3">
+    <form class="row m-3" action="#" method="post">
         <section class="col-12 mt-3">
             <h1>Interests</h1>
             <hr>
@@ -29,85 +29,48 @@
         <section class="col-12">
 
             <!--Site Bio-->
-            <form action="">
+            <div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="interests1">In-door Interests:</label>
-                    <div class="checkbox row">
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="interests1" name="interests1[]" value="tv"> tv</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="movies"> movies</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="cooking"> cooking</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="board games"> board games</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="puzzles"> puzzles</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="reading"> reading</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="playing cards"> playing cards</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests1[]" value="video games"> video games</label>
-                        </div>
+
+                    <label class="font-weight-bold" for="indoor">In-door Interests:</label>
+
+                    <div class="checkbox row" id="indoor">
+
+                        <repeat group="{{@indoor}}" value="{{@indoorOptions}}">
+                                <div class="col-sm-3">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="indoor[]" value="{{@indoorOptions}}">
+                                            {{@indoorOptions}}</label>
+                                </div>
+                        </repeat>
 
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="interests2">Out-door Interests:</label>
-                    <div class="checkbox row">
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="interests2" name="interests2[]" value="hiking"> hiking</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests2[]" value="biking"> biking</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests2[]" value="swimming"> swimming</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests2[]" value="collecting"> collecting</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests2[]" value="walking"> walking</label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="interests2[]" value="climbing"> climbing</label>
-                        </div>
+                    <label class="font-weight-bold" for="outdoor">Out-door Interests:</label>
+                    <div class="checkbox row" id="outdoor">
+
+                        <repeat group="{{@outdoor}}" value="{{@outdoorOptions}}">
+                            <div class="col-sm-3">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="outdoor[]" value="{{@outdoorOptions}}">
+                                    {{@outdoorOptions}}</label>
+                            </div>
+                        </repeat>
+
                     </div>
                 </div>
 
-            </form>
+            </div>
         </section>
 
 
         <div class="col text-right mr-3 mb-3">
             <button class="btn btn-primary" type="submit">Next ></button>
         </div>
-    </div>
+    </form>
 </div>
 
 
