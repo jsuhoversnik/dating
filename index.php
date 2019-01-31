@@ -27,5 +27,67 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
+$f3->route('POST /personal', function($f3){
+    /*
+    $_SESSION=array();
+    if(isset($_POST['color'])){
+        $color=$_POST['color'];
+        if(validColor($color)){
+            $_SESSION['color']=$color;
+            $f3->reroute('/result');
+        }else{
+            $f3->set("error['color']","Please select a color.");
+        }
+    }
+    */
+    //print_r($_POST);
+//    $_SESSION["animal"] = $_POST[animal];
+//    $f3->set("animal", $_SESSION["animal"]);
+    //print_r($_SESSION);
+
+    $template = new Template();
+    echo $template->render('views/personal.html');
+});
+
+$f3->route('POST /personal', function($f3){
+    /*
+    $_SESSION=array();
+    if(isset($_POST['color'])){
+        $color=$_POST['color'];
+        if(validColor($color)){
+            $_SESSION['color']=$color;
+            $f3->reroute('/result');
+        }else{
+            $f3->set("error['color']","Please select a color.");
+        }
+    }
+    */
+    //print_r($_POST);
+//    $_SESSION["animal"] = $_POST[animal];
+//    $f3->set("animal", $_SESSION["animal"]);
+    //print_r($_SESSION);
+
+    $template = new Template();
+    echo $template->render('views/personal.html');
+});
+
+$f3->route('POST /profile', function($f3){
+
+    $template = new Template();
+    echo $template->render('views/profile.html');
+});
+
+$f3->route('POST /interests', function($f3){
+
+    $template = new Template();
+    echo $template->render('views/interests.html');
+});
+
+$f3->route('POST /summary', function($f3){
+
+    $template = new Template();
+    echo $template->render('views/summary.html');
+});
+
 //run fat free
 $f3->run();
