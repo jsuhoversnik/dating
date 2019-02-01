@@ -1,10 +1,10 @@
 <!--
     Jake Suhoversnik
-    1/18/19
-    Assignment 1 Dating website
-    home.html
+    1/31/19
+    Assignment 2 Dating website
+    profile.html
 
-    Default view, landing page for dating website
+    profile information page, contains email, state, seeking, and bio
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -33,23 +33,30 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control" id="email" name="email" value="{{@SESSION.email}}">
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="state">State:</label>
                     <select class="form-control" id="state" name="state">
-                        <option value="Washington">Washington</option>
-                        <option value="Oregon">Oregon</option>
+                        <repeat group="{{@states}}" value="{{@stateOption}}">
+                            <option value="{{@stateOption}}"
+                            <check if="@stateOption == @SESSION.state">
+                                selected
+                            </check>
+                            > {{@stateOption}}</option>
+                        </repeat>
                     </select>
                 </div>
 
-
                 <div class="form-group">
                     <label class="font-weight-bold" for="seeking1">Seeking:</label>
-                    <div class="radio">
-                        <label class="radio-inline"><input type="radio" id="seeking1" name="seeking" value="Male" checked> Male</label>
-                        <label class="radio-inline"><input type="radio" name="seeking" value="Female"> Female</label>
+                    <div class="radio" id="seeking1">
+                        <label class="radio-inline"><input type="radio" name="seeking" value="Male" checked > Male</label>
+                        <label class="radio-inline"><input type="radio" name="seeking" value="Female"
+                            <check if="{{@SESSION.seeking}} == Female" >
+                                checked
+                            </check>> Female</label>
                     </div>
                 </div>
             </div>
@@ -58,7 +65,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label class="font-weight-bold" for="bio">Biography:</label>
-                <textarea class="form-control" rows="5" id="bio" name="bio"></textarea>
+                <textarea class="form-control" rows="5" id="bio" name="bio">{{@SESSION.bio}}</textarea>
             </div>
         </div>
 

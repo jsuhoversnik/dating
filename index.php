@@ -25,6 +25,7 @@ $f3 = Base::instance();
 $f3->set('indoor', array('tv','movies','cooking','board games','puzzles','reading','playing cards','video games'));
 $f3->set('outdoor', array('hiking','biking','swimming','collecting',
     'walking','climbing'));
+$f3->set('states',array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'));
 
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
@@ -79,11 +80,13 @@ $f3->route('GET|POST /personal',
             $f3->set("errors['phone']","Unrecognized phone number provided");
         }
     }
-
-    //todo make me actually stop things
-    if(!isset($errors['fname']) and isset($fname))
+    //todo phone validation is weird
+    if(!empty($_POST['fname']) and !empty($_POST['lname']) and !empty($_POST['age']) and !empty($_POST['phone']))
     {
-       $f3->reroute('/profile');
+        if(!isset($errors['fname']) and !isset($errors['lname']) and !isset($errors['age']) and !isset($errors['phone']))
+        {
+            $f3->reroute('/profile');
+        }
     }
 
     $template = new Template();
@@ -116,7 +119,7 @@ $f3->route('GET|POST /profile', function($f3){
         $_SESSION['bio'] = $bio;
     }
 
-    if(!empty($_POST)){
+    if(!empty($_POST['email'])){
         $f3->reroute('/interests');
     }
 
