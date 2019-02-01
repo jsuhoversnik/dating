@@ -38,9 +38,9 @@
 
                     <p class="border mt-0 mb-0">Age: {{@SESSION['age']}}</p>
                     <p class="border mt-0 mb-0">Phone: {{@SESSION['phone']}}</p>
-                    <p class="border mt-0 mb-0">Email: </p>
-                    <p class="border mt-0 mb-0">State: </p>
-                    <p class="border mt-0 mb-0">Seeking: </p>
+                    <p class="border mt-0 mb-0">Email: {{@SESSION['email']}}</p>
+                    <p class="border mt-0 mb-0">State: {{@SESSION['state']}}</p>
+                    <p class="border mt-0 mb-0">Seeking: {{@SESSION['seeking']}}</p>
 
                     <p class="border mt-0 mb-0">Interests:
                         <check if="{{isset(@SESSION['outdoor'])}}">
@@ -69,7 +69,7 @@
 
             <div class="">
                 <label for="bio">Biography</label>
-                <p id="bio">Populated biography goes here</p>
+                <p id="bio">{{@SESSION['bio']}}</p>
             </div>
         </div>
 

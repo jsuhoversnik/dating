@@ -94,12 +94,41 @@ $f3->route('GET|POST /profile', function($f3){
 
     print_r($_SESSION);
 
+    $_SESSION['email'] = null;
+    $_SESSION['state'] = null;
+    $_SESSION['seeking'] = null;
+    $_SESSION['bio'] = null;
+
+    if(isset($_POST['email'])){
+        $email = $_POST['email'];
+        $_SESSION['email'] = $email;
+    }
+    if(isset($_POST['state'])){
+        $state = $_POST['state'];
+        $_SESSION['state'] = $state;
+    }
+    if(isset($_POST['seeking'])){
+        $seeking = $_POST['seeking'];
+        $_SESSION['seeking'] = $seeking;
+    }
+    if(isset($_POST['bio'])){
+        $bio = $_POST['bio'];
+        $_SESSION['bio'] = $bio;
+    }
+
+    if(!empty($_POST)){
+        $f3->reroute('/interests');
+    }
+
+
     $template = new Template();
     echo $template->render('views/profile.html');
 });
 
 $f3->route('GET|POST /interests',
     function($f3){
+
+    print_r($_SESSION);
 
     $_SESSION['indoor'] = array();
     $_SESSION['outdoor'] = array();
