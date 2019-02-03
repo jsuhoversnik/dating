@@ -4,6 +4,9 @@
  * User: Jake
  * Date: 1/30/2019
  * Time: 10:45 PM
+ *
+ * validation-functions.php
+ * form validation functions to ensure valid data is given
  */
 
 
@@ -25,7 +28,7 @@ function validName($item)
  */
 function validAge($item)
 {
-    return ctype_digit($item) and $item > 18;
+    return ctype_digit($item) and $item >= 18;
 }
 
 /* Validate given phone number is valid
@@ -38,7 +41,8 @@ function validAge($item)
  */
 function validPhone($item)
 {
-    return ctype_digit($item) and strlen($item) == 10;
+    //echo strlen($item);
+    return (ctype_digit($item) and strlen($item) == 10);
 }
 
 /* Validate outdoor activities checklist

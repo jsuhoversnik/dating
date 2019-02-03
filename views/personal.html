@@ -42,18 +42,28 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="lname">Last Name:</label>
+
+                    <check if="{{isset(@errors['lname'])}}">
+                        <p>{{@errors['lname']}}</p>
+                    </check>
+
                     <input type="text" class="form-control" id="lname" name="lname" value="{{@SESSION.lname}}">
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="age">Age:</label>
+                    <label class="font-weight-bold" for="age">Age: (18+)</label>
+
+                    <check if="{{isset(@errors['age'])}}">
+                        <p>{{@errors['age']}}</p>
+                    </check>
+
                     <input type="number" class="form-control" id="age" name="age" value="{{@SESSION.age}}">
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="gender">Gender:</label>
-                    <div class="radio" id="gender">
-                        <label class="radio-inline"><input type="radio" name="gender" value="Male" checked > Male</label>
+                    <div class="radio">
+                        <label class="radio-inline"><input type="radio" id="gender" name="gender" value="Male" checked > Male</label>
                         <label class="radio-inline"><input type="radio" name="gender" value="Female"
                             <check if="{{@SESSION.gender}} == Female" >
                                 checked
@@ -64,6 +74,11 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="phone">Phone Number:</label>
+
+                    <check if="{{isset(@errors['phone'])}}">
+                        <p>{{@errors['phone']}}</p>
+                    </check>
+
                     <input type="text" class="form-control" id="phone" name="phone" value="{{@SESSION.phone}}">
                 </div>
 
@@ -89,6 +104,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
-</html></title>
-</head>
-<body>
+</html>

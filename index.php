@@ -40,7 +40,7 @@ $f3->route('GET|POST /personal',
     function($f3){
 
     $_SESSION = array();
-    print_r($_POST);
+    //print_r($_POST);
 
     if(isset($_POST['fname'])){
         $fname = $_POST['fname'];
@@ -85,6 +85,8 @@ $f3->route('GET|POST /personal',
     {
         if(!isset($errors['fname']) and !isset($errors['lname']) and !isset($errors['age']) and !isset($errors['phone']))
         {
+            $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",3,0);
+            $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",7,0);
             $f3->reroute('/profile');
         }
     }
@@ -95,7 +97,7 @@ $f3->route('GET|POST /personal',
 
 $f3->route('GET|POST /profile', function($f3){
 
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
     $_SESSION['email'] = null;
     $_SESSION['state'] = null;
@@ -103,8 +105,14 @@ $f3->route('GET|POST /profile', function($f3){
     $_SESSION['bio'] = null;
 
     if(isset($_POST['email'])){
+
         $email = $_POST['email'];
         $_SESSION['email'] = $email;
+
+        if(empty($_POST['email']))
+        {
+                $f3->set("errors['email']","invalid email provided");
+        }
     }
     if(isset($_POST['state'])){
         $state = $_POST['state'];
@@ -124,6 +132,7 @@ $f3->route('GET|POST /profile', function($f3){
     }
 
 
+
     $template = new Template();
     echo $template->render('views/profile.html');
 });
@@ -131,11 +140,8 @@ $f3->route('GET|POST /profile', function($f3){
 $f3->route('GET|POST /interests',
     function($f3){
 
-    print_r($_SESSION);
-
     $_SESSION['indoor'] = array();
     $_SESSION['outdoor'] = array();
-    print_r($_POST);
 
     if(isset($_POST['outdoor'])) {
         $outdoor = $_POST['outdoor'];
@@ -161,9 +167,12 @@ $f3->route('GET|POST /interests',
         }
     }
 
-    //TODO replace !empty with a away to allow no interests to be selected
-    if(!isset($errors['outdoor']) and !isset($errors['outdoor']) and !empty($_POST)){
-        $f3->reroute('/summary');
+    if($f3->get("errors['indoor']") == null and $f3->get("errors['outdoor']") == null)
+    {
+        if(isset($_POST['submit']))
+        {
+            $f3->reroute('/summary');
+        }
     }
 
     $template = new Template();
@@ -171,8 +180,6 @@ $f3->route('GET|POST /interests',
 });
 
 $f3->route('GET|POST /summary', function($f3){
-
-    //print_r($_SESSION);
 
     $template = new Template();
     echo $template->render('views/summary.html');

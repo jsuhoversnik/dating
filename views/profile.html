@@ -33,6 +33,11 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold" for="email">Email:</label>
+
+                    <check if="{{isset(@errors['email'])}}">
+                        <p>{{@errors['email']}}</p>
+                    </check>
+
                     <input type="email" class="form-control" id="email" name="email" value="{{@SESSION.email}}">
                 </div>
 
@@ -50,9 +55,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bold" for="seeking1">Seeking:</label>
-                    <div class="radio" id="seeking1">
-                        <label class="radio-inline"><input type="radio" name="seeking" value="Male" checked > Male</label>
+                    <label class="font-weight-bold" for="seeking">Seeking:</label>
+                    <div class="radio">
+                        <label class="radio-inline"><input type="radio" id="seeking" name="seeking"
+                                                           value="Male" checked > Male</label>
                         <label class="radio-inline"><input type="radio" name="seeking" value="Female"
                             <check if="{{@SESSION.seeking}} == Female" >
                                 checked
@@ -81,6 +87,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
-</html></title>
-</head>
-<body>
+</html>
