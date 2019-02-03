@@ -35,10 +35,12 @@
 
                     <label class="font-weight-bold">In-door Interests:</label>
 
+
                     <check if="{{isset(@errors['indoor'])}}">
                         <p>{{@errors['indoor']}}</p>
                     </check>
                     <div class="checkbox row" id="indoor">
+                        <!--use a loop to print all options, conditionally check if they were checked for sticky-->
                         <repeat group="{{@indoor}}" value="{{@indoorOptions}}">
                                 <div class="col-sm-3">
                                     <label class="checkbox-inline">
@@ -60,6 +62,7 @@
 
                     <div class="checkbox row" id="outdoor">
 
+                        <!--use a loop to print all options, conditionally check if they were checked for sticky-->
                         <repeat group="{{@outdoor}}" value="{{@outdoorOptions}}">
                             <div class="col-sm-3">
                                 <label class="checkbox-inline">

@@ -36,55 +36,71 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
-$f3->route('GET|POST /personal',
-    function($f3){
+$f3->route('GET|POST /personal', function($f3){
 
+    //wipe our session values we're using if we didnt reroute
     $_SESSION = array();
     //print_r($_POST);
 
-    if(isset($_POST['fname'])){
+    if(isset($_POST['fname']))
+    {
         $fname = $_POST['fname'];
-            if (validName($fname)) {
+            if (validName($fname))
+            {
                 $_SESSION['fname'] = $fname;
-            } else {
+            }
+            else
+            {
                 $f3->set("errors['fname']", "First name contains non alphabetic characters.");
             }
     }
-    if(isset($_POST['lname'])){
+    if(isset($_POST['lname']))
+    {
         $lname = $_POST['lname'];
-        if (validName($lname)) {
+        if (validName($lname))
+        {
             $_SESSION['lname'] = $lname;
-        } else {
+        }
+        else
+        {
             $f3->set("errors['lname']", "Last name contains non alphabetic characters.");
         }
     }
-    if(isset($_POST['age'])){
+    if(isset($_POST['age']))
+    {
         $age = $_POST['age'];
-        if(validAge($age)){
+        if(validAge($age))
+        {
             $_SESSION['age'] = $age;
-        } else{
+        }
+        else
+        {
             $f3->set("errors['age']","Provided age under 18");
         }
     }
-    if(isset($_POST['gender'])){
+    if(isset($_POST['gender']))
+    {
         $_SESSION['gender'] = $_POST['gender'];
     }
 
-    if(isset($_POST['phone'])){
+    if(isset($_POST['phone']))
+    {
         $phone = $_POST['phone'];
-        if(validPhone($phone)){
-
-            //todo inset into phone string '-' marks
+        if(validPhone($phone))
+        {
             $_SESSION['phone'] = $phone;
-        }else{
+        }
+        else
+        {
             $f3->set("errors['phone']","Unrecognized phone number provided");
         }
     }
-    //todo phone validation is weird
+
     if(!empty($_POST['fname']) and !empty($_POST['lname']) and !empty($_POST['age']) and !empty($_POST['phone']))
     {
         if(!isset($errors['fname']) and !isset($errors['lname']) and !isset($errors['age']) and !isset($errors['phone']))
         {
+            //add formatting to our phone number
             $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",3,0);
             $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",7,0);
             $f3->reroute('/profile');
@@ -97,15 +113,15 @@ $f3->route('GET|POST /personal',
 
 $f3->route('GET|POST /profile', function($f3){
 
-    //print_r($_SESSION);
 
+    //wipe our session values we're using if we didnt reroute
     $_SESSION['email'] = null;
     $_SESSION['state'] = null;
     $_SESSION['seeking'] = null;
     $_SESSION['bio'] = null;
 
-    if(isset($_POST['email'])){
-
+    if(isset($_POST['email']))
+    {
         $email = $_POST['email'];
         $_SESSION['email'] = $email;
 
@@ -114,46 +130,54 @@ $f3->route('GET|POST /profile', function($f3){
                 $f3->set("errors['email']","invalid email provided");
         }
     }
-    if(isset($_POST['state'])){
+    if(isset($_POST['state']))
+    {
         $state = $_POST['state'];
         $_SESSION['state'] = $state;
     }
-    if(isset($_POST['seeking'])){
+    if(isset($_POST['seeking']))
+    {
         $seeking = $_POST['seeking'];
         $_SESSION['seeking'] = $seeking;
     }
-    if(isset($_POST['bio'])){
+    if(isset($_POST['bio']))
+    {
         $bio = $_POST['bio'];
         $_SESSION['bio'] = $bio;
     }
 
-    if(!empty($_POST['email'])){
+    if(!empty($_POST['email']))
+    {
         $f3->reroute('/interests');
     }
-
-
 
     $template = new Template();
     echo $template->render('views/profile.html');
 });
 
-$f3->route('GET|POST /interests',
-    function($f3){
+$f3->route('GET|POST /interests', function($f3){
 
+    //wipe our session values we're using if we didnt reroute
     $_SESSION['indoor'] = array();
     $_SESSION['outdoor'] = array();
 
-    if(isset($_POST['outdoor'])) {
+    if(isset($_POST['outdoor']))
+    {
         $outdoor = $_POST['outdoor'];
-        foreach ($outdoor as $item) {
-            if (validOutdoor($item)) {
+        foreach ($outdoor as $item)
+        {
+            if (validOutdoor($item))
+            {
                 $_SESSION['outdoor'][] = $item;
-            } else {
+            }
+            else
+            {
                 $f3->set("errors['outdoor']", "Invalid value submitted.");
             }
         }
     }
-    if(isset($_POST['indoor'])) {
+    if(isset($_POST['indoor']))
+    {
         $indoor = $_POST['indoor'];
         foreach ($indoor as $item)
         {
