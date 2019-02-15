@@ -83,6 +83,15 @@
                     <input type="text" class="form-control" id="phone" name="phone" value="{{@SESSION.phone}}">
                 </div>
 
+                <div class="form-group">
+                    <label class="font-weight-bold" for="premium">Premium Membership:</label>
+                    <br />
+                    <label><input type="checkbox" value="" name="premium" id="premium"
+                        <check if="{{isset(@SESSION.premium)}}" >
+                            checked
+                        </check>> Sign me up for a Premium Account!</label>
+                </div>
+
 
             </div>
         </section>

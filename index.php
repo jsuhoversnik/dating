@@ -95,6 +95,10 @@ $f3->route('GET|POST /personal', function($f3){
             $f3->set("errors['phone']","Unrecognized phone number provided");
         }
     }
+    if(isset($_POST['premium']))
+    {
+        $_SESSION['premium'] = $_POST['premium'];
+    }
 
     if(!empty($_POST['fname']) and !empty($_POST['lname']) and !empty($_POST['age']) and !empty($_POST['phone']))
     {
@@ -113,6 +117,7 @@ $f3->route('GET|POST /personal', function($f3){
 
 $f3->route('GET|POST /profile', function($f3){
 
+    print_r($_SESSION);
 
     //wipe our session values we're using if we didnt reroute
     $_SESSION['email'] = null;
@@ -146,9 +151,13 @@ $f3->route('GET|POST /profile', function($f3){
         $_SESSION['bio'] = $bio;
     }
 
-    if(!empty($_POST['email']))
+    if(!empty($_POST['email']) and isset($_SESSION['premium']))
     {
         $f3->reroute('/interests');
+    }
+    if(!empty($_POST['email']))
+    {
+        $f3->reroute('/summary');
     }
 
     $template = new Template();
@@ -204,6 +213,7 @@ $f3->route('GET|POST /interests', function($f3){
 });
 
 $f3->route('GET|POST /summary', function($f3){
+    print_r($_SESSION);
 
     $template = new Template();
     echo $template->render('views/summary.html');

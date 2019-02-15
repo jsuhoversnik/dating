@@ -42,20 +42,22 @@
                     <p class="border mt-0 mb-0 p-2">State: {{@SESSION['state']}}</p>
                     <p class="border mt-0 mb-0 p-2">Seeking: {{@SESSION['seeking']}}</p>
 
-                    <!--if we have values for outdoor and indoor activites, loop each one and print it-->
-                    <p class="border mt-0 mb-0 p-2 rounded-bottom">Interests:
-                        <check if="{{isset(@SESSION['outdoor'])}}">
-                            <repeat group="{{@SESSION['outdoor']}}" value="{{@outdoorChoices}}">
-                                {{@outdoorChoices}}
-                            </repeat>
-                        </check>
+                    <check if="{{isset(@SESSION.premium)}}" >
+                        <!--if we have values for outdoor and indoor activites, loop each one and print it-->
+                        <p class="border mt-0 mb-0 p-2 rounded-bottom">Interests:
+                            <check if="{{isset(@SESSION['outdoor'])}}">
+                                <repeat group="{{@SESSION['outdoor']}}" value="{{@outdoorChoices}}">
+                                    {{@outdoorChoices}}
+                                </repeat>
+                            </check>
 
-                        <check if="{{isset(@SESSION['indoor'])}}">
-                            <repeat group="{{@SESSION['indoor']}}" value="{{@indoorChoices}}">
-                                {{@indoorChoices}}
-                            </repeat>
-                        </check>
-                    </p>
+                            <check if="{{isset(@SESSION['indoor'])}}">
+                                <repeat group="{{@SESSION['indoor']}}" value="{{@indoorChoices}}">
+                                    {{@indoorChoices}}
+                                </repeat>
+                            </check>
+                        </p>
+                    </check>
                 </div>
             </form>
         </section>
