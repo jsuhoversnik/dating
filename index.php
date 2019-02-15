@@ -107,6 +107,18 @@ $f3->route('GET|POST /personal', function($f3){
             //add formatting to our phone number
             $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",3,0);
             $_SESSION['phone'] = substr_replace($_SESSION['phone'], "-",7,0);
+
+            if(isset($_SESSION['premium']))
+            {
+                $member = new PremiumMember($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],$_SESSION['gender'],$_SESSION['phone']);
+            }
+            else
+            {
+                $member = new Member($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],$_SESSION['gender'],$_SESSION['phone']);
+            }
+
+            $_SESSION['member'] = $member;
+
             $f3->reroute('/profile');
         }
     }
@@ -150,6 +162,12 @@ $f3->route('GET|POST /profile', function($f3){
         $bio = $_POST['bio'];
         $_SESSION['bio'] = $bio;
     }
+
+    //add values to member object
+    $_SESSION['member']->setEmail($_SESSION['email']);
+    $_SESSION['member']->setState($_SESSION['state']);
+    $_SESSION['member']->setSeeking($_SESSION['seeking']);
+    $_SESSION['member']->setBio($_SESSION['bio']);
 
     if(!empty($_POST['email']) and isset($_SESSION['premium']))
     {
@@ -204,6 +222,9 @@ $f3->route('GET|POST /interests', function($f3){
     {
         if(isset($_POST['submit']))
         {
+            $_SESSION['member']->setInDoorInterests($_SESSION['indoor']);
+            $_SESSION['member']->setOutDoorInterests($_SESSION['outdoor']);
+
             $f3->reroute('/summary');
         }
     }
@@ -213,7 +234,7 @@ $f3->route('GET|POST /interests', function($f3){
 });
 
 $f3->route('GET|POST /summary', function($f3){
-    print_r($_SESSION);
+    print_r($_SESSION['member']);
 
     $template = new Template();
     echo $template->render('views/summary.html');
