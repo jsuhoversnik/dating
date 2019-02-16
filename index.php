@@ -129,7 +129,7 @@ $f3->route('GET|POST /personal', function($f3){
 
 $f3->route('GET|POST /profile', function($f3){
 
-    print_r($_SESSION);
+    //print_r($_SESSION);
 
     //wipe our session values we're using if we didnt reroute
     $_SESSION['email'] = null;
@@ -184,6 +184,9 @@ $f3->route('GET|POST /profile', function($f3){
 
 $f3->route('GET|POST /interests', function($f3){
 
+    //print_r($_SESSION['member']);
+    //echo get_class($_SESSION['member']) == 'PremiumMember';
+    //echo $_SESSION['member']->getOutdoorInterests();
     //wipe our session values we're using if we didnt reroute
     $_SESSION['indoor'] = array();
     $_SESSION['outdoor'] = array();
@@ -222,8 +225,12 @@ $f3->route('GET|POST /interests', function($f3){
     {
         if(isset($_POST['submit']))
         {
-            $_SESSION['member']->setInDoorInterests($_SESSION['indoor']);
-            $_SESSION['member']->setOutDoorInterests($_SESSION['outdoor']);
+            if(isset($_SESSION['premium']))
+            {
+                $_SESSION['member']->setInDoorInterests($_SESSION['indoor']);
+                $_SESSION['member']->setOutDoorInterests($_SESSION['outdoor']);
+            }
+
 
             $f3->reroute('/summary');
         }
@@ -234,8 +241,8 @@ $f3->route('GET|POST /interests', function($f3){
 });
 
 $f3->route('GET|POST /summary', function($f3){
-    print_r($_SESSION['member']);
-
+    //print_r($_SESSION['member']);
+    //echo get_class($_SESSION['member']);
     $template = new Template();
     echo $template->render('views/summary.html');
 });
