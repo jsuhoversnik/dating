@@ -15,7 +15,6 @@
     <!--Bootstrap Styles-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 </head>
 <body>
 
@@ -25,12 +24,9 @@
             <h1>Profile</h1>
             <hr>
         </section>
-
         <section class="col-md-6">
-
             <!--Site Bio-->
             <div>
-
                 <div class="form-group">
                     <label class="font-weight-bold" for="email">Email:</label>
 
@@ -40,7 +36,6 @@
 
                     <input type="email" class="form-control" id="email" name="email" value="{{@SESSION.email}}">
                 </div>
-
                 <div class="form-group">
                     <label class="font-weight-bold" for="state">State:</label>
                     <select class="form-control" id="state" name="state">
@@ -53,7 +48,6 @@
                         </repeat>
                     </select>
                 </div>
-
                 <!--Male is checked by default, use conditional to change checked to female for sticky forms-->
                 <div class="form-group">
                     <label class="font-weight-bold" for="seeking">Seeking:</label>
@@ -68,20 +62,17 @@
                 </div>
             </div>
         </section>
-
         <div class="col-md-6">
             <div class="form-group">
                 <label class="font-weight-bold" for="bio">Biography:</label>
                 <textarea class="form-control" rows="5" id="bio" name="bio">{{@SESSION.bio}}</textarea>
             </div>
         </div>
-
         <div class="col text-right mr-3 mb-3">
             <button class="btn btn-primary" type="submit">Next ></button>
         </div>
     </form>
 </div>
-
 
 <!--Bootstrap scripts-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -15,7 +15,6 @@
     <!--Bootstrap Styles-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
 </head>
 <body>
 
@@ -25,17 +24,11 @@
             <h1>Interests</h1>
             <hr>
         </section>
-
         <section class="col-12">
-
             <!--Site Bio-->
             <div>
-
                 <div class="form-group">
-
                     <label class="font-weight-bold">In-door Interests:</label>
-
-
                     <check if="{{isset(@errors['indoor'])}}">
                         <p>{{@errors['indoor']}}</p>
                     </check>
@@ -49,19 +42,14 @@
                                             {{@indoorOptions}}</label>
                                 </div>
                         </repeat>
-
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="font-weight-bold">Out-door Interests:</label>
-
                     <check if="{{isset(@errors['outdoor'])}}">
                         <p>{{@errors['outdoor']}}</p>
                     </check>
-
                     <div class="checkbox row" id="outdoor">
-
                         <!--use a loop to print all options, conditionally check if they were checked for sticky-->
                         <repeat group="{{@outdoor}}" value="{{@outdoorOptions}}">
                             <div class="col-sm-3">
@@ -71,20 +59,15 @@
                                     {{@outdoorOptions}}</label>
                             </div>
                         </repeat>
-
                     </div>
                 </div>
-
             </div>
         </section>
-
-
         <div class="col text-right mr-3 mb-3">
             <button class="btn btn-primary" type="submit" name="submit">Next ></button>
         </div>
     </form>
 </div>
-
 
 <!--Bootstrap scripts-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

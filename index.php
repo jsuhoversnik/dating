@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Jake
- * Date: 1/17/2019
- * Time: 4:55 PM
+ * @author Jake Suhoversnik
+ * @version 1.0
  *
  * index.php
  * Fat Free Framework with default route set for dating website
@@ -36,11 +34,10 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
-$f3->route('GET|POST /personal', function($f3){
-
+$f3->route('GET|POST /personal', function($f3)
+{
     //wipe our session values we're using if we didnt reroute
     $_SESSION = array();
-    //print_r($_POST);
 
     if(isset($_POST['fname']))
     {
@@ -122,15 +119,12 @@ $f3->route('GET|POST /personal', function($f3){
             $f3->reroute('/profile');
         }
     }
-
     $template = new Template();
     echo $template->render('views/personal.html');
 });
 
-$f3->route('GET|POST /profile', function($f3){
-
-    //print_r($_SESSION);
-
+$f3->route('GET|POST /profile', function($f3)
+{
     //wipe our session values we're using if we didnt reroute
     $_SESSION['email'] = null;
     $_SESSION['state'] = null;
@@ -182,11 +176,8 @@ $f3->route('GET|POST /profile', function($f3){
     echo $template->render('views/profile.html');
 });
 
-$f3->route('GET|POST /interests', function($f3){
-
-    //print_r($_SESSION['member']);
-    //echo get_class($_SESSION['member']) == 'PremiumMember';
-    //echo $_SESSION['member']->getOutdoorInterests();
+$f3->route('GET|POST /interests', function($f3)
+{
     //wipe our session values we're using if we didnt reroute
     $_SESSION['indoor'] = array();
     $_SESSION['outdoor'] = array();
@@ -231,7 +222,6 @@ $f3->route('GET|POST /interests', function($f3){
                 $_SESSION['member']->setOutDoorInterests($_SESSION['outdoor']);
             }
 
-
             $f3->reroute('/summary');
         }
     }
@@ -240,9 +230,8 @@ $f3->route('GET|POST /interests', function($f3){
     echo $template->render('views/interests.html');
 });
 
-$f3->route('GET|POST /summary', function($f3){
-    //print_r($_SESSION['member']);
-    //echo get_class($_SESSION['member']);
+$f3->route('GET|POST /summary', function($f3)
+{
     $template = new Template();
     echo $template->render('views/summary.html');
 });
