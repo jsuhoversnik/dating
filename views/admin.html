@@ -3,46 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Member List</title>
+
+    <!--Bootstrap Styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 </head>
 <body>
 
 <h1>Membership</h1>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>State</th>
-        <th>Gender</th>
-        <th>Seeking</th>
-        <th>Premium</th>
-        <th>Interests</th>
-    </tr>
-    <repeat group="{{ @members }}" value="{{ @Member }}">
+<table class="table">
+    <thead>
         <tr>
-            <td>{{ @Member['member_id'] }}</td>
-            <td><a href="{{ @BASE }}/admin/{{ @Member['member_id'] }}">{{ @Member['lname'] }} {{ @Member['fname'] }}</a></td>
-            <td>{{ @Member['age'] }}</td>
-            <td>{{ @Member['phone'] }}</td>
-            <td>{{ @Member['email'] }}</td>
-            <td>{{ @Member['state'] }}</td>
-            <td>{{ @Member['gender'] }}</td>
-            <td>{{ @Member['seeking'] }}</td>
-
-            <td>
-                <input type="checkbox" disabled
-                <check if="{{ @Member['premium']==1}}">checked</check>>
-            </td>
-
-            <td>
-                <check if="{{ @Member['interests']!='null'}}">{{ @Member['interests'] }}</check>
-            </td>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">State</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Seeking</th>
+            <th scope="col">Premium</th>
+            <th scope="col">Interests</th>
         </tr>
-    </repeat>
+    </thead>
+    <tbody>
+            <repeat group="{{ @members }}" value="{{ @Member }}">
+                <tr>
+                    <th scope="row">{{ @Member['member_id'] }}</th>
+
+                    <td>
+                        <a href="{{ @BASE }}/admin/{{ @Member['member_id'] }}">
+                            {{ @Member['lname'] }} {{ @Member['fname'] }}
+                        </a>
+                    </td>
+
+                    <td>{{ @Member['age'] }}</td>
+                    <td>{{ @Member['phone'] }}</td>
+                    <td>{{ @Member['email'] }}</td>
+                    <td>{{ @Member['state'] }}</td>
+                    <td>{{ @Member['gender'] }}</td>
+                    <td>{{ @Member['seeking'] }}</td>
+
+                    <td>
+                        <input type="checkbox" disabled
+                            <check if="{{ @Member['premium']==1}}">
+                                checked
+                            </check>
+                        >
+                    </td>
+
+                    <td>
+                        <check if="{{ @Member['interests']!='null'}}">
+                            {{ @Member['interests'] }}
+                        </check>
+                    </td>
+                </tr>
+            </repeat>
+    </tbody>
 </table>
+
+<!--Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 </body>
 </html>

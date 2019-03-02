@@ -61,17 +61,26 @@ class Database
     function addMember($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests)
     {
         global $dbh;
-
+        $dbh = $this->connect();
+        //echo $image;
         //1. define the query
-        $sql = "INSERT INTO Members
-            VALUES (:id, :fname, :lname, :age, :gender, :phone, :email, : :state, :seeking, :bio, :premium, :image, :interests)";
+
+        $sql = "INSERT INTO Members(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, `bio`, `premium`, `interests`)
+            VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :interests)";
+
+/*
+        $sql = "INSERT INTO Members(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, `bio`, `premium`, `image`, `interests`)
+            VALUES ('jane','doe',30,
+        'Female','1234567890','jane@email.com','Idaho',
+        'Male','Why is this not working',0,'','')";
+*/
 
         //2. prepare the statement
         $statement = $dbh->prepare($sql);
 
         //3. bind parameters
-        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
         $statement->bindParam(':age', $age, PDO::PARAM_INT);
         $statement->bindParam(':gender', $gender, PDO::PARAM_STR);
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
@@ -80,23 +89,25 @@ class Database
         $statement->bindParam(':seeking', $seeking, PDO::PARAM_STR);
         $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
         $statement->bindParam(':premium', $premium, PDO::PARAM_BOOL);
-        $statement->bindParam(':image', $image, PDO::PARAM_STR);
         $statement->bindParam(':interests', $interests, PDO::PARAM_STR);
 
+       // echo $statement;
 
         //4. execute the statement
         $success = $statement->execute();
 
         //5. return the result
         return $success;
+
     }
 
     function getMember($id)
     {
         global $dbh;
+        $dbh = $this->connect();
 
         //1. define the query
-        $sql = "SELECT * FROM Members WHERE id = :id";
+        $sql = "SELECT * FROM Members WHERE member_id = :id";
 
         //2. prepare the statement
         $statement = $dbh->prepare($sql);
@@ -110,10 +121,23 @@ class Database
         //5. return the result
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        //print_r($result);
-        return new PremiumMember($result['fname'], $result['lname'], $result['age'],
+        //check if this is a premium member
+        if($result['premium'] == 1)
+        {
+
+            $interests = explode(';',$result['interests']);
+            $outdoor = explode(',',$interests[0]);
+            $indoor = explode(',',$interests[1]);
+
+
+            return new PremiumMember($result['fname'], $result['lname'], $result['age'],
+                $result['gender'], $result['phone'], $result['email'], $result['state'],
+                $result['seeking'], $result['bio'],$indoor,$outdoor);
+        }
+
+        // if not premium we dont need some fields
+        return new Member($result['fname'], $result['lname'], $result['age'],
             $result['gender'], $result['phone'], $result['email'], $result['state'],
-            $result['seeking'], $result['bio'], $result['premium'], $result['image'],
-            $result['interests']);
+            $result['seeking'], $result['bio']);
     }
 }

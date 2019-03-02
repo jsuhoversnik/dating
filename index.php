@@ -31,12 +31,11 @@ $f3->set('states',array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California'
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
 
-
-include_once('views/navbar.html');
-
 //define a default route
 $f3->route('GET /', function(){
+
     $view = new View();
+    include_once('views/navbar.html');
     echo $view->render('views/home.html');
 });
 
@@ -125,6 +124,7 @@ $f3->route('GET|POST /personal', function($f3)
             $f3->reroute('/profile');
         }
     }
+    include_once('views/navbar.html');
     $template = new Template();
     echo $template->render('views/personal.html');
 });
@@ -178,6 +178,7 @@ $f3->route('GET|POST /profile', function($f3)
         $f3->reroute('/summary');
     }
 
+    include_once('views/navbar.html');
     $template = new Template();
     echo $template->render('views/profile.html');
 });
@@ -232,13 +233,33 @@ $f3->route('GET|POST /interests', function($f3)
         }
     }
 
+    include_once('views/navbar.html');
     $template = new Template();
     echo $template->render('views/interests.html');
 });
 
 $f3->route('GET|POST /summary', function()
 {
+    global $dbh;
+    $dbh = new Database();
 
+    if(get_class($_SESSION['member']) == "member")
+    {
+        $dbh->addMember($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],
+            $_SESSION['gender'],$_SESSION['phone'],$_SESSION['email'],$_SESSION['state'],
+            $_SESSION['seeking'],$_SESSION['bio'],0,"","");
+    }
+    else
+    {
+        $interests = implode(', ',$_SESSION['outdoor']) . ";" . implode(', ',$_SESSION['indoor']);
+
+        $dbh->addMember($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],
+            $_SESSION['gender'],$_SESSION['phone'],$_SESSION['email'],$_SESSION['state'],
+            $_SESSION['seeking'],$_SESSION['bio'],1,"",$interests);
+    }
+
+
+    include_once('views/navbar.html');
     $template = new Template();
     echo $template->render('views/summary.html');
 });
@@ -253,10 +274,51 @@ $f3->route('GET /admin', function($f3)
     $members = $dbh->getMembers();
     $f3->set('members', $members);
 
-    //load a template
+    include_once('views/navbar.html');
     $template = new Template();
     echo $template->render('views/admin.html');
 });
+
+$f3->route('GET /admin/@id',
+    function($f3, $params) {
+        global $dbh;
+
+        //test db connect
+        $dbh = new Database();
+
+
+        $id = $params['id'];
+        $member = $dbh->getMember($id);
+        $f3->set('member', $member);
+
+
+        $f3->set('fname', $member->getFname());
+        $f3->set('lname', $member->getLname());
+        $f3->set('age', $member->getAge());
+        $f3->set('gender', $member->getGender());
+        $f3->set('phone', $member->getPhone());
+        $f3->set('email', $member->getEmail());
+        $f3->set('state', $member->getState());
+        $f3->set('seeking', $member->getSeeking());
+        $f3->set('bio', $member->getBio());
+
+        //echo get_class($member);
+        //echo get_class($member) == "PremiumMember";
+
+        //if this is a premium member include other field information
+        if (get_class($member) == "PremiumMember")
+        {
+        $f3->set('indoor', $member->getInDoorInterests());
+        $f3->set('outdoor', $member->getOutDoorInterests());
+        }
+        //image
+
+
+
+        include_once('views/navbar.html');
+        $template = new Template();
+        echo $template->render('views/view-member.html');
+    });
 
 //run fat free
 $f3->run();
