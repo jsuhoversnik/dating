@@ -15,10 +15,13 @@ error_reporting(E_ALL);
 require_once('vendor/autoload.php');
 require_once('model/validation-functions.php');
 
+
 session_start();
 
 //create and instance of the Base class
 $f3 = Base::instance();
+
+
 
 $f3->set('indoor', array('tv','movies','cooking','board games','puzzles','reading','playing cards','video games'));
 $f3->set('outdoor', array('hiking','biking','swimming','collecting',
@@ -27,6 +30,7 @@ $f3->set('states',array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California'
 
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
+
 
 //define a default route
 $f3->route('GET /', function(){
@@ -230,10 +234,26 @@ $f3->route('GET|POST /interests', function($f3)
     echo $template->render('views/interests.html');
 });
 
-$f3->route('GET|POST /summary', function($f3)
+$f3->route('GET|POST /summary', function()
 {
+
     $template = new Template();
     echo $template->render('views/summary.html');
+});
+
+$f3->route('GET /admin', function($f3)
+{
+    global $dbh;
+    //test db connect
+    $dbh = new Database();
+    //$dbh -> connect();
+    //$dbh->getMembers();
+    $members = $dbh->getMembers();
+    $f3->set('members', $members);
+
+    //load a template
+    $template = new Template();
+    echo $template->render('views/admin.html');
 });
 
 //run fat free
