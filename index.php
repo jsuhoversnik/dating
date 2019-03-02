@@ -32,6 +32,8 @@ $f3->set('states',array('Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California'
 $f3->set('DEBUG',3);
 
 
+include_once('views/navbar.html');
+
 //define a default route
 $f3->route('GET /', function(){
     $view = new View();

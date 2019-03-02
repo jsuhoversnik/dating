@@ -42,7 +42,7 @@ class Database
 
         $dbh = $this->connect();
         //1. define the query
-        $sql = "SELECT * FROM Members";
+        $sql = "SELECT * FROM Members ORDER BY lname";
 
         //2. prepare the statement
         $statement = $dbh->prepare($sql);
@@ -58,7 +58,7 @@ class Database
         return $result;
     }
 
-    function addMember($id, $fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests)
+    function addMember($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests)
     {
         global $dbh;
 
