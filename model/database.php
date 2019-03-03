@@ -117,15 +117,17 @@ class Database
         //check if this is a premium member
         if($result['premium'] == 1)
         {
-
+            $interests = explode(',',$result['interests']);
+/*
             $interests = explode(';',$result['interests']);
             $outdoor = explode(',',$interests[0]);
             $indoor = explode(',',$interests[1]);
+*/
 
 
             return new PremiumMember($result['fname'], $result['lname'], $result['age'],
                 $result['gender'], $result['phone'], $result['email'], $result['state'],
-                $result['seeking'], $result['bio'],$indoor,$outdoor);
+                $result['seeking'], $result['bio'],$interests,"");
         }
 
         // if not premium we dont need some fields

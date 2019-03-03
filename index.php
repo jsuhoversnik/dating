@@ -243,7 +243,7 @@ $f3->route('GET|POST /summary', function()
     global $dbh;
     $dbh = new Database();
 
-    if(get_class($_SESSION['member']) == "member")
+    if(get_class($_SESSION['member']) == "Member")
     {
         $dbh->addMember($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],
             $_SESSION['gender'],$_SESSION['phone'],$_SESSION['email'],$_SESSION['state'],
@@ -251,7 +251,7 @@ $f3->route('GET|POST /summary', function()
     }
     else
     {
-        $interests = implode(', ',$_SESSION['outdoor']) . ";" . implode(', ',$_SESSION['indoor']);
+        $interests = implode(', ',$_SESSION['outdoor']) ." ". implode(', ',$_SESSION['indoor']);
 
         $dbh->addMember($_SESSION['fname'],$_SESSION['lname'],$_SESSION['age'],
             $_SESSION['gender'],$_SESSION['phone'],$_SESSION['email'],$_SESSION['state'],
@@ -267,10 +267,9 @@ $f3->route('GET|POST /summary', function()
 $f3->route('GET /admin', function($f3)
 {
     global $dbh;
-    //test db connect
+
     $dbh = new Database();
-    //$dbh -> connect();
-    //$dbh->getMembers();
+
     $members = $dbh->getMembers();
     $f3->set('members', $members);
 
