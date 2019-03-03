@@ -283,9 +283,7 @@ $f3->route('GET /admin/@id',
     function($f3, $params) {
         global $dbh;
 
-        //test db connect
         $dbh = new Database();
-
 
         $id = $params['id'];
         $member = $dbh->getMember($id);
@@ -302,18 +300,12 @@ $f3->route('GET /admin/@id',
         $f3->set('seeking', $member->getSeeking());
         $f3->set('bio', $member->getBio());
 
-        //echo get_class($member);
-        //echo get_class($member) == "PremiumMember";
-
         //if this is a premium member include other field information
         if (get_class($member) == "PremiumMember")
         {
         $f3->set('indoor', $member->getInDoorInterests());
         $f3->set('outdoor', $member->getOutDoorInterests());
         }
-        //image
-
-
 
         include_once('views/navbar.html');
         $template = new Template();

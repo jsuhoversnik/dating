@@ -2,19 +2,19 @@
 
 /*
  * CREATE TABLE Members(
-    member_id INT AUTO_INCREMENT PRIMARY KEY,
-    fname varchar(50),
-    lname varchar(50),
-    age INT,
-    gender varchar(1),
-    phone varchar(12),
-    email varchar(50),
-    state varchar(2),
-    seeking varchar(1),
-    bio varchar(255),
-    premium tinyint,
-    image varchar(255),
-    interests varchar(255)
+  `member_id` int(11) NOT NULL,
+  `fname` varchar(50) DEFAULT NULL,
+  `lname` varchar(50) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `gender` varchar(6) DEFAULT NULL,
+  `phone` varchar(12) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `state` varchar(18) DEFAULT NULL,
+  `seeking` varchar(6) DEFAULT NULL,
+  `bio` varchar(255) DEFAULT NULL,
+  `premium` tinyint(4) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `interests` varchar(255) DEFAULT NULL
     );
  */
 //Connect to the database
@@ -61,19 +61,12 @@ class Database
     function addMember($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests)
     {
         global $dbh;
+
         $dbh = $this->connect();
-        //echo $image;
         //1. define the query
 
         $sql = "INSERT INTO Members(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, `bio`, `premium`, `interests`)
             VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :interests)";
-
-/*
-        $sql = "INSERT INTO Members(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, `bio`, `premium`, `image`, `interests`)
-            VALUES ('jane','doe',30,
-        'Female','1234567890','jane@email.com','Idaho',
-        'Male','Why is this not working',0,'','')";
-*/
 
         //2. prepare the statement
         $statement = $dbh->prepare($sql);
